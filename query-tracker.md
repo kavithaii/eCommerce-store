@@ -6,7 +6,7 @@
   - If multiple discount is possible then is there a criteria on maximum discount because 11 discount codes i.e. 110% discount will cause cash back?
 
 2. Can we assume the following two API's are already available? Can this be stubbed?
-  -The store also has two admin API's:
+  - The store also has two admin API's:
     Generate a discount code if the condition above is satisfied.
     Lists count of items purchased, total purchase amount, list of discount codes and total discount amount.
   
