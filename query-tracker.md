@@ -7,6 +7,7 @@
 
 2. Can we assume the following two API's are already available? Can this be stubbed?
   - The store also has two admin API's:
-    Generate a discount code if the condition above is satisfied.
-    Lists count of items purchased, total purchase amount, list of discount codes and total discount amount.
+    - Generate a discount code if the condition above is satisfied.
+    - Lists count of items purchased, total purchase amount, list of discount codes and total discount amount.
   
+3. How should the merchant be notified about new coupon code on the nth order? **(email/sms/on UI ?)**
