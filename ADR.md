@@ -16,11 +16,11 @@ Clients can add items to their cart  and checkout  to successfully place an orde
 
 **Decision Outcome**
 
-Chosen option: "[option 1]", because [justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force force | … | comes out best (see below)].****
+Chosen option: **Option 1**, because we intend to build a scalable, lite weight application to demonstrate technical capabilities
 
 **Pros and Cons of the Options**
 
-### [option 1]
+### Option 1
 
 [React, Typescript, Express and SQLite]
 
@@ -28,10 +28,10 @@ Chosen option: "[option 1]", because [justification. e.g., only option, which me
 - Good, because easy to learn
 - Bad, because Higher Pace Of Development, more code needed to do the same thing. DB is not suitable for large scale apps
 
-### [option 2]
+### Option 2
 
 [Angular, Python, NodeJS and MongoDB]
 
-- Good, because [argument a]
-- Good, because [argument b]
-- Bad, because [argument c]
+- Good, because Start quickly, great community, full cloud-based developer data platform
+- Good, because it is used for scientific and mathematical computing
+- Bad, because Limited SEO Capabilities, High memory usage
