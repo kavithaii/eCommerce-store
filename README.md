@@ -24,7 +24,3 @@ npm run test
 
 Give a ⭐️ if this project helped you!
 
-If you feel generous and want to show some extra appreciation:
-
-[![Buy me a coffee][buymeacoffee-shield]][buymeacoffee]
-
