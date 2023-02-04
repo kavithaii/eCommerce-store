@@ -12,7 +12,11 @@ const router = express.Router()
 // this means that '/all' translates to '/products/all'
 router.get('/all', productsRoutes.productsAll)
 
+router.get('/cartall', productsRoutes.cartAll)
+
 router.post('/addcart', productsRoutes.addCart)
+
+router.post('/checkout', productsRoutes.checkout)
 
 //router.put('/delete', productsRoutes.deleteCartItem)
 
