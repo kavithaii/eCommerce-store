@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 
 // Import components
 import { Products } from './components/products'
+import { Cart } from './components/cart'
 
 // Import styles
 import './styles/styles.css'
@@ -12,4 +13,5 @@ import './styles/styles.css'
 const rootElement = document.getElementById('root')
 
 // Render Bookshelf component in the DOM
-render(<Products />, rootElement)
+// render(<Products />, rootElement)
+render(<Cart />, rootElement)
