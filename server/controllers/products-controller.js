@@ -111,7 +111,7 @@ exports.addCart = async (req, res) => {
 // Checkout from cart
 exports.checkout = async (req, res) => {
   console.log(">>>cart params: Customer Id", req.body.id)
-  findTotalCost()
+  console.log('>>> returned from total cost:', await(findTotalCost()))
   /*
 
   - select all the items from the cart for the given customer id
@@ -157,9 +157,10 @@ exports.getOrderCount = () => {
 }
 
 findTotalCost = async () => {
+  let ct, t
   // TODO should we match the Customerid?
   console.log('>>> inside findTotalCost')
-  library('cart')
+  await library('cart')
     .join('products', 'cart.productid', '=', 'products.id')
     .count ('cart.quantity', {as: 'count'})
     //.select ('cart.quantity', 'products.price')
@@ -167,25 +168,16 @@ findTotalCost = async () => {
     //.sum(library.raw('(?? * ??)', ['cart.quantity', 'products.price']))
     .sum({amount: library.raw('(?? * ??)', ['cart.quantity', 'products.price'])})
     .then(userData => {
-      console.log('>>> cart count:', userData[0].count)
-      console.log('>>> total:', userData[0].amount)
-    })
+        console.log('>>> cart count:', userData[0].count)
+        console.log('>>> total:', userData[0].amount)
+        ct = userData[0].count
+        t = userData[0].amount
+      }
+    )
     .catch(err => {
       console.log('>>>', err)
       // Send status code and error message in response
-      //res.status(422).json({ message: `There was an error in getting cart details ${req.body.name}, Error: ${err}` })
-    })
-
-/*   library('cart')
-    .join('products', 'cart.productid', '=', 'products.id')
-    .count ('cart.quantity', {as: 'count'})
-    .then(userData => {
-      console.log('>>> cart count:', userData[0].count)
-    })
-    .catch(err => {
-      console.log('>>>', err)
-      // Send status code and error message in response
-      //res.status(422).json({ message: `There was an error in getting cart details ${req.body.name}, Error: ${err}` })
-    }) */
-  //return({count: count, total: total})  
+      res.status(422).json({ message: `There was an error in getting cart count and total orders, Error: ${err}` })
+    })  
+  return({count: ct, total: t})
 }
