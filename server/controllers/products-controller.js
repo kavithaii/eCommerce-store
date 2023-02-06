@@ -161,6 +161,41 @@ exports.checkout = async (req, res) => {
     } 
 }
 
+// Retrieve order details 
+exports.orderDetail = async (req, res) => {
+  // Get order details from database'
+  console.log('Get order details from database')
+  library
+    .select('*') // select all records
+    .from('order').max('id') // from 'order' table getting the recent order details
+    .then(userData => {
+      // Send order extracted from database in response
+      res.json(userData)
+      console.log('Retrieving order details')
+    })
+    .catch(err => {
+      // Send status code and error message in response
+      res.status(404).json({ message: `There was an error retrieving order details: ${err}` })
+    })
+}
+
+// Empty items from the cart
+exports.emptyCart = async (req, res) => {
+  // Remove all items from the cart
+  library
+    .select('*') // select all records
+    .from('cart') // from 'cart' table
+    .truncate() // remove the selection
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: 'Cart is Empty' })
+    })
+    .catch(err => {
+      // Send status code and error message in response
+      res.status(422).json({ message: `There was an error emptying the Cart : ${err}.` })
+    })
+}
+
 generateCouponCode = (customerid) => {
   // Generate the discount code, update in db
   let todaysdate = new Date();

@@ -18,9 +18,9 @@ router.post('/addcart', productsRoutes.addCart)
 
 router.post('/checkout', productsRoutes.checkout)
 
-//router.put('/delete', productsRoutes.deleteCartItem)
+router.get('/order', productsRoutes.orderDetail) 
 
-//router.put('/checkout', productsRoutes.checkout)
+router.put('/emptycart', productsRoutes.emptyCart)
 
 // Export router
 module.exports = router
