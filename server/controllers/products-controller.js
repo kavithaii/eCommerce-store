@@ -105,7 +105,6 @@ exports.addCart = async (req, res) => {
 // Checkout from cart 
 exports.checkout = async (req, res) => {
   console.log(">>>cart params: Customer Id", req.body.id)
-  console.log("~~~~~~~~~~~~~~~", getConstants.DiscountPER)
 
   let discountapplicable = false
   let couponcode = ""

@@ -14,14 +14,8 @@ export const Order = () => {
   // Prepare states
   console.log('Rendering invoice.tsx')
   
-  const [id, setId] = useState('')
-  const [customerid, setCustomerId] = useState('')
-  const [totalamount, setTotalAmount] = useState('')
-  const [couponcode, setCouponCode] = useState('')
-  const [discount, setDiscount] = useState('')
   const [order, setOrder] = useState([])
   const [loading, setLoading] = useState(true)
-  const [errorMessage, setErrorMessage] = useState('')
 
   // Fetch order detail on initial render
   useEffect(() => {
