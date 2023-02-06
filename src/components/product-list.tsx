@@ -32,17 +32,12 @@ export const ProductList = (props: ProductListUI) => {
         <thead>
           <tr>
             <th className="table-head-item" />
-	    <th></th>
-            <th className="table-head-item"><b>Store Name</b> </th>
-            
+	          <th></th>
+            <th className="table-head-item"><strong>Products</strong></th>
             <th></th>
             <th></th>
             <th></th>
-            
-	    <th className="table-head-item">CART </th>
-            
-            <th className="table-head-item" />
-          </tr>
+          </tr> 
         </thead>
 
         <tbody className="table-body">

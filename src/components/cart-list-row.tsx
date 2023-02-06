@@ -26,19 +26,10 @@ export const CartListRow = (props: CartListRowUI) => (
     </td>
 
     <td className="table-item">
-      <button className="btn btn-remove" onClick={() => props.handleRemoveCartItem(props.cart.productid)}>
-        -
-      </button>
-    </td>
-
-    <td className="table-item">
       {props.cart.quantity}
     </td>
 
     <td className="table-item">
-      <button className="btn btn-remove" onClick={() => props.handleRemoveCartItem(props.cart.productname)}>
-        +
-      </button>
     </td>
   </tr>
 )

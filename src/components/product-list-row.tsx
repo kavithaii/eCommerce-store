@@ -47,13 +47,5 @@ export const ProductListRow = (props: ProductListRowUI) => (
         Add to Cart
       </button>
     </td>
-
-
-
-
-
-
-
-
   </tr>
 )
