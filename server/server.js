@@ -23,7 +23,8 @@ app.use(compression())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-// Implement products route
+// Implement route
+app.use('/healthcheck', require('./routes/healthcheck-route'))
 app.use('/products', productsRouter)
 
 // Implement 500 error route
@@ -37,7 +38,14 @@ app.use(function (req, res, next) {
   res.status(404).send('Sorry we could not find that.')
 })
 
-// Start express app
-app.listen(PORT, function() {
-  console.log(`Server is running on: ${PORT}`)
-})
+// launch the server and listen only when running as a standalone process
+if (!module.parent) {
+  // start listening if all good... 
+  app.listen(PORT, async () => {
+      console.log(
+          `API server is listening on port ${PORT}`
+      );
+  });
+}
+
+module.exports = { app, PORT } // testing purpose
