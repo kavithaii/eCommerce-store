@@ -1,5 +1,6 @@
 // Import database
 const library = require('./../db')
+const getConstants = require('../constants')
 
 // Retrieve all products
 exports.productsAll = async (req, res) => {
@@ -40,7 +41,6 @@ exports.cartAll = async (req, res) => {
 // Add items to Cart
 exports.addCart = async (req, res) => {
   console.log(">>>cart params:", req.body.id, " -- ", req.body.name)
-  const customerid = 'C1'
   let quantity = 1
   // Verify that the product already exists in the cart
   library('cart')
@@ -56,7 +56,7 @@ exports.addCart = async (req, res) => {
         // Add products to cart
         library('cart')
         .insert({
-          'customerid': customerid,
+          'customerid': getConstants.customerid,
           'productid': req.body.id,
           'quantity': quantity,
           'productname': req.body.name
@@ -104,9 +104,7 @@ exports.addCart = async (req, res) => {
 
 // Checkout from cart 
 exports.checkout = async (req, res) => {
-
   console.log(">>>cart params: Customer Id", req.body.id)
-  const DiscountPER = 0.1
 
   let discountapplicable = false
   let couponcode = ""
@@ -143,7 +141,7 @@ exports.checkout = async (req, res) => {
     //If Discount is Applicable generate CouponCode and Discount Amount
     if (discountapplicable) {
       couponcode = generateCouponCode(req.body.id)
-      discountAmount = totalAmount.total*DiscountPER
+      discountAmount = totalAmount.total*(getConstants.DiscountPER)
       console.log('Coupon Code and Discount Amount ',couponcode, '--',discountAmount)
 
       library('order')
@@ -153,11 +151,11 @@ exports.checkout = async (req, res) => {
             'couponcode': couponcode
           })
           .then(() => {
-            //res.status(201).json({ message: `Product \'${req.body.id}\' added to cart.` })
+            //res.status(201).json({ message: `Order \'${req.body.id}\' updated.` })
           })
           .catch(err => {
             console.log('>>>', err)
-            //res.status(422).json({ message: `There was an error in adding to cart ${req.body.name}, Error: ${err}` })
+            //res.status(422).json({ message: `There was an error in updating order ${req.body.name}, Error: ${err}` })
           })
     } 
 }
@@ -179,8 +177,6 @@ calculateTotalAmount = async () => {
     .count ('cart.quantity', {as: 'count'})
     .sum({amount: library.raw('(?? * ??)', ['cart.quantity', 'products.price'])})
     .then(userData => {
-        console.log('>>> cart count:', userData[0].count)
-        console.log('>>> total:', userData[0].amount)
         ct = userData[0].count
         t = userData[0].amount
       }
@@ -196,8 +192,6 @@ calculateTotalAmount = async () => {
 
 //  Check if discount can be applied on the order
 isDiscountValid = async (customerid) => {
-
-  const NthDiscountOrder = 5
   let validDiscount = false
   console.log(">>>cart params: isDiscountValid : Customer Id", customerid)
   
@@ -207,12 +201,11 @@ isDiscountValid = async (customerid) => {
     .where('customerid',customerid)
     .then(userData => {
       console.log('>>> count of orders', userData.length)
-      console.log(userData.length%NthDiscountOrder)
-      if (userData.length%(NthDiscountOrder) == 0) {
+      console.log(userData.length%(getConstants.NthDiscountOrder))
+      if (userData.length%(getConstants.NthDiscountOrder) == 0) {
         console.log("Discount Applicable")
         validDiscount = true
-      } 
-    
+      }
     })
     .catch(err => {
       // Send status code and error message in response
@@ -220,6 +213,6 @@ isDiscountValid = async (customerid) => {
       res.status(404).json({ message: `There was an error retrieving books: ${err}` })
     })
 
-    console.log('>>> validDiscount ',validDiscount)
-    return validDiscount
+  console.log('>>> validDiscount ',validDiscount)
+  return validDiscount
 }
