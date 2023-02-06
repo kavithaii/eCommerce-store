@@ -28,8 +28,8 @@ exports.cartAll = async (req, res) => {
     .select('*') // select all records
     .from('cart') // from 'cart' table
     .then(userData => {
-      // Send books extracted from database in response
-      res.json(userData)
+      // Send products extracted from database in response
+      res.status(200).json(userData)
       console.log('Retrieving all cart items')
     })
     .catch(err => {
@@ -170,7 +170,7 @@ exports.orderDetail = async (req, res) => {
     .from('order').max('id') // from 'order' table getting the recent order details
     .then(userData => {
       // Send order extracted from database in response
-      res.json(userData)
+      res.status(200).json(userData)
       console.log('Retrieving order details')
     })
     .catch(err => {
@@ -188,7 +188,7 @@ exports.emptyCart = async (req, res) => {
     .truncate() // remove the selection
     .then(() => {
       // Send a success message in response
-      res.json({ message: 'Cart is Empty' })
+      res.status(200).json({ message: 'Cart is Empty' })
     })
     .catch(err => {
       // Send status code and error message in response

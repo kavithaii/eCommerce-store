@@ -18,6 +18,7 @@ npm run start
 
 ```sh
 npm run test
+npm run test-rest
 ```
 
 ## Show your support
