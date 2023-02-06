@@ -85,7 +85,6 @@ library.schema
             table.string('customerid')
             table.string('date')
             table.string('totalamount')
-            table.string('status')
             table.string('discount')         
             table.integer('couponcode')
           })
