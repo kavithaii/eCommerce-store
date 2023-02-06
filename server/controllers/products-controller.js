@@ -38,7 +38,7 @@ exports.cartAll = async (req, res) => {
     })
 }
 
-// Add items to Cart
+// Add product to Cart
 exports.addCart = async (req, res) => {
   console.log(">>>cart params:", req.body.id, " -- ", req.body.name)
   let quantity = 1
@@ -49,11 +49,11 @@ exports.addCart = async (req, res) => {
     .where('productid', req.body.id)
     .then(userData => {
       // Send products extracted from database in response
-      console.log('>>> from cart', JSON.stringify(userData))
-      console.log('>>> find length', userData.length)
+      /* console.log('>>> from cart', JSON.stringify(userData))
+      console.log('>>> find length', userData.length) */
       if(userData.length === 0){
         console.log('inside insert', quantity)
-        // Add products to cart
+        // Add product to Cart
         library('cart')
         .insert({
           'customerid': getConstants.customerid,

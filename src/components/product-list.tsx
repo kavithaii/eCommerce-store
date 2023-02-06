@@ -56,12 +56,7 @@ export const ProductList = (props: ProductListUI) => {
               <td className="table-item" style={{ textAlign: 'center' }} colSpan={6}>There are no products to show. Create one!</td>
             </tr>
           )
-        }
-
-
-    
-
-
+         }
         </tbody>
     </table>
   )

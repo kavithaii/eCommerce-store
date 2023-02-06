@@ -79,11 +79,10 @@ export const Products = () => {
               console.error(`There was an error adding the ${name} to cart: ${error}`)
               console.log('>>>>',error)
       })
-
   }
 
   return (
-    <div className="book-list-wrapper">
+    <div className="product-list-wrapper">
 
       {/* Render product list component */}
       <ProductList products={products} loading={loading} handleAddToCart={handleAddToCart} />

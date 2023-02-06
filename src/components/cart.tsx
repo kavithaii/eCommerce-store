@@ -10,15 +10,11 @@ import './../styles/product.css'
 
 // Create Product component
 export const Cart = () => {
+
   // Prepare states
-  
   console.log('Rendering cart.tsx')
-  
-  const [id, setId] = useState('')
+
   const [customerid, setCustomerId] = useState('')
-  const [productid, setProductId] = useState('')
-  const [quantity, setQuantitity] = useState('')
-  const [productname, setProductName] = useState('')
   const [cart, setCart] = useState([])
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState('')
@@ -68,7 +64,6 @@ export const Cart = () => {
 
   }
 
-
   // Checkout from cart
   const handleCheckout = () => {
     axios
@@ -86,11 +81,10 @@ export const Cart = () => {
               console.error(`There was an error in checkout for customer id ${customerid} from cart: ${error}`)
               console.log('>>>>',error)
       })
-
   }
 
   return (
-    <div className="book-list-wrapper">
+    <div className="product-list-wrapper">
 
       {/* Render cart list component */}
       <CartList cart={cart} loading={loading} handleRemoveCartItem={handleRemoveCartItem} />
