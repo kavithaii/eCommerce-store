@@ -105,6 +105,7 @@ exports.addCart = async (req, res) => {
 // Checkout from cart 
 exports.checkout = async (req, res) => {
   console.log(">>>cart params: Customer Id", req.body.id)
+  console.log("~~~~~~~~~~~~~~~", getConstants.DiscountPER)
 
   let discountapplicable = false
   let couponcode = ""
@@ -194,6 +195,7 @@ calculateTotalAmount = async () => {
 isDiscountValid = async (customerid) => {
   let validDiscount = false
   console.log(">>>cart params: isDiscountValid : Customer Id", customerid)
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~',getConstants.NthDiscountOrder)
   
   await library
     .select('*') // Select all records

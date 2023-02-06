@@ -17,7 +17,6 @@ export const Cart = () => {
   const [customerid, setCustomerId] = useState('')
   const [cart, setCart] = useState([])
   const [loading, setLoading] = useState(true)
-  const [errorMessage, setErrorMessage] = useState('')
 
   // Fetch all cartitems on initial render
   useEffect(() => {
@@ -57,7 +56,6 @@ export const Cart = () => {
       })
       .catch(error => {
               // Error
-              setErrorMessage('product already exists')
               console.error(`There was an error removing the ${productid} from cart: ${error}`)
               console.log('>>>>',error)
       })
