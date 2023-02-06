@@ -3,7 +3,7 @@ const library = require('./../db')
 
 // Retrieve all products
 exports.productsAll = async (req, res) => {
-  // Get all products from database'
+  // Get all products from database
   console.log('Get all products from database')
   library
     .select('*') // select all records
@@ -37,20 +37,18 @@ exports.cartAll = async (req, res) => {
     })
 }
 
-// Add to Cart
+// Add items to Cart
 exports.addCart = async (req, res) => {
   console.log(">>>cart params:", req.body.id, " -- ", req.body.name)
   const customerid = 'C1'
   let quantity = 1
-  // let productExistsInCart
-  // verify if the product already exists in the cart
+  // Verify that the product already exists in the cart
   library('cart')
     .select('*')
     .from('cart')
     .where('productid', req.body.id)
     .then(userData => {
       // Send products extracted from database in response
-      // res.json(userData)
       console.log('>>> from cart', JSON.stringify(userData))
       console.log('>>> find length', userData.length)
       if(userData.length === 0){
@@ -76,10 +74,7 @@ exports.addCart = async (req, res) => {
 
       if(userData.length == 1){
         console.log('>>> find quantity', userData[0].quantity, '   product name:', userData[0].productname)
-        console.log('>>> inside if >>>')
-        /* console.log('>>> before productExistsInCart',productExistsInCart)
-        productExistsInCart = true
-        console.log('>>> after productExistsInCart',productExistsInCart) */
+        //Increament the quantity
         quantity = userData[0].quantity + 1
 
         // Update product quantity in cart
@@ -168,7 +163,7 @@ exports.checkout = async (req, res) => {
 }
 
 generateCouponCode = (customerid) => {
-  // Generate the discount code, update in db and mark status as active
+  // Generate the discount code, update in db
   let todaysdate = new Date();
   let month = todaysdate.getMonth()+1 // getMonth() returns the month index (0 to 11) and thus incrementing by 1
   
@@ -200,7 +195,6 @@ calculateTotalAmount = async () => {
 
 
 //  Check if discount can be applied on the order
-
 isDiscountValid = async (customerid) => {
 
   const NthDiscountOrder = 5
@@ -208,7 +202,7 @@ isDiscountValid = async (customerid) => {
   console.log(">>>cart params: isDiscountValid : Customer Id", customerid)
   
   await library
-    .select('*') // select all records
+    .select('*') // Select all records
     .from('order') // from 'books' table
     .where('customerid',customerid)
     .then(userData => {
@@ -228,5 +222,4 @@ isDiscountValid = async (customerid) => {
 
     console.log('>>> validDiscount ',validDiscount)
     return validDiscount
-
 }
